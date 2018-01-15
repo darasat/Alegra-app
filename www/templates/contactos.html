@@ -1,0 +1,25 @@
+<ion-view view-title="Contactos">
+
+  <ion-content  ng-init="obtenerContactos()">
+   <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder=" Buscar" ng-model="contacto" style="width:100%;text-align:center"/>
+      </label>
+   <ion-refresher  on-refresh="doRefresh()"></ion-refresher>
+    <ion-list>
+	   <ion-item   ng-repeat="contacto in contactos|filter:contacto" class="item item-icon-left" href="#/app/contactos/{{contacto.id}}">
+	   <i class="icon ion-person"></i>
+        {{contacto.name}}
+		<p>{{contacto.id}}</p>
+          <ion-option-button class="button-assertive"
+                            ng-click = "onItemDelete({{contacto.id}})">
+            Borrar
+          </ion-option-button>
+          <!-- <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button> -->
+      </ion-item>
+	  
+	  
+    </ion-list>
+	      <ion-infinite-scroll   on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
